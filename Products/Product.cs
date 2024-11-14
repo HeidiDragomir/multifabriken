@@ -2,11 +2,10 @@
 {
     public class Product
     {
-        public string Name { get; }
-
-        public void AddChoice(string choice)
+        public virtual string Name { get; }
+        public virtual void DisplayInfo()
         {
-
+            Console.WriteLine("Produkt info:");
         }
     }
 }
