@@ -1,39 +1,52 @@
 ﻿
 using Multifabriken.Products;
-
-var car = new Car();
-
+using Multifabriken;
+using Multifabriken.App;
 
 Console.WriteLine("Välkommen, kunden!");
 
+Order order = new Order();
 
+
+ConsoleUserInteraction userInteraction = new ConsoleUserInteraction();
 
 bool run = true;
 
 while (run)
 {
-    Console.WriteLine("Vad vill du göra?");
+    userInteraction.ShowMessage("Vad vill du göra?");
 
-    Console.WriteLine("1. Beställa produkt.");
-    Console.WriteLine("2. Se alla beställda produkter.");
-    Console.WriteLine("3. Avsulta programmet.");
+    userInteraction.ShowMessage("1. Beställa produkt.");
+    userInteraction.ShowMessage("2. Se alla beställda produkter.");
+    userInteraction.ShowMessage("3. Avsulta programmet.");
 
     string choiceMainMenu = Console.ReadLine();
+    //int number;
 
-    bool isParsingSuccesfulInput = int.TryParse(choiceMainMenu, out int number);
+    //bool isParsingSuccesfulInput = int.TryParse(choiceMainMenu, out int number);
 
-    if (String.IsNullOrEmpty(choiceMainMenu))
+
+    //if (String.IsNullOrEmpty(choiceMainMenu))
+    //{
+    //    userInteraction.ShowMessage("Ditt val är null eller empty.");
+    //    continue;
+    //}
+    //else if (!isParsingSuccesfulInput)
+    //{
+    //    userInteraction.ShowMessage("Nej, du måste välja en siffra. Försök igen!");
+    //    continue;
+    //}
+    //else
+    //{
+    //    userInteraction.ShowMessage($"Du har valt {number}.");
+    //}
+
+    if (!userInteraction.IsUserInputValid(choiceMainMenu, out int number))
     {
-        Console.WriteLine("Ditt val är null eller empty.");
+        continue;
     }
-    else if (isParsingSuccesfulInput)
-    {
-        Console.WriteLine("Du har valt " + number + ".");
-    }
-    else
-    {
-        Console.WriteLine("Nej, du måste välja en siffra. Försök igen!");
-    }
+
+    Console.Clear();
 
     switch (number)
     {
@@ -43,45 +56,78 @@ while (run)
 
             while (run2)
             {
-                Console.WriteLine("Vad vill du beställa?");
-                Console.WriteLine("a. Bil.");
-                Console.WriteLine("b. Goodis.");
-                Console.WriteLine("c. Rör.");
-                Console.WriteLine("d. Havremjölk.");
-                Console.WriteLine("x. Return to previous menu.");
+                userInteraction.ShowMessage("Vad vill du beställa?");
+                userInteraction.ShowMessage("a. Bil.");
+                userInteraction.ShowMessage("b. Goodis.");
+                userInteraction.ShowMessage("c. Rör.");
+                userInteraction.ShowMessage("d. Havremjölk.");
+                userInteraction.ShowMessage("x. Ingenting. Tillbaka till meny.");
 
                 string choiceProduct = Console.ReadLine();
+
+                Console.Clear();
 
                 switch (choiceProduct)
                 {
                     case "a":
-                        Console.WriteLine("Du har valt en bil.");
-                        Console.WriteLine("Skriv registreringsnummer:");
 
-                        string input3 = Console.ReadLine();
-                        
+                        // Ask user for car details
+                        userInteraction.ShowMessage("Skriv registreringsnummer: ");
+                        string registrationNumber = Console.ReadLine();
+
+                        userInteraction.ShowMessage("Skriv färg: ");
+                        string color = Console.ReadLine();
+
+                        userInteraction.ShowMessage("Skriv bilmärke: ");
+                        string brand = Console.ReadLine();
+
+                        // Create Car object with the provided info
+                        Product orderedCar = new Car(registrationNumber, color, brand);
+
+                        Console.Clear();
+
+                        order.AddProduct(orderedCar);
+
+                        orderedCar.DisplayInfo();
 
                         break;
 
                     case "b":
-                        Console.WriteLine("Du har beställt goodis.");
+                        // Ask user for car details
+                        userInteraction.ShowMessage("Skriv smak: ");
+                        string flavour = Console.ReadLine();
+
+                        userInteraction.ShowMessage("Skriv antal: ");
+                        string quantity = Console.ReadLine();
+
+                        userInteraction.IsUserInputValid(quantity, out int num);
+
+                        // Create Car object with the provided info
+                        Product orderedSweets = new Sweets(flavour, num);
+
+                        //Console.Clear();
+
+                        order.AddProduct(orderedSweets);
+
+                        orderedSweets.DisplayInfo();
+
                         break;
 
                     case "c":
-                        Console.WriteLine("Du har beställt en rör.");
+                        userInteraction.ShowMessage("Du har beställt en rör.");
                         break;
 
                     case "d":
-                        Console.WriteLine("Du har beställt havremjöl.");
+                        userInteraction.ShowMessage("Du har beställt havremjöl.");
                         break;
 
                     case "x":
-                        Console.WriteLine("Back to the main menu.");
+                        userInteraction.ShowMessage("Back to the main menu.");
                         run2 = false;
                         break;
 
                     default:
-                        Console.WriteLine("Försök igen!");
+                        userInteraction.ShowMessage("Försök igen!");
                         break;
 
                 }
@@ -92,20 +138,24 @@ while (run)
             break;
 
         case 2:
-            Console.WriteLine("Du kan se alla beställda produkter nu.");
+            userInteraction.ShowMessage("Din order:");
+
+            order.SeeAllProducts();
+
             break;
 
         case 3:
-            Console.WriteLine("Program avslutas.");
+            userInteraction.ShowMessage("Program avslutas.");
             run = false;
+            userInteraction.Exit();
             break;
 
         default:
-            Console.WriteLine("Försök igen!");
+            userInteraction.ShowMessage("Försök igen!");
             break;
     }
 }
 
 
-Console.ReadKey();
+
 

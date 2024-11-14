@@ -4,18 +4,31 @@ namespace Multifabriken.Products
 {
     public class Car : Product
     {
-        public string Name => "Bil";
+        public override string Name => "Bil";
 
-        public string RegistrationNumber {  get; set; }
+        public string RegistrationNumber { get; set; }
 
         public string Color { get; set; }
 
         public string Brand { get; set; }
 
-
-        public string AddChoice(string choice)
+        public Car(string registrationNumber, string color, string brand)
         {
-            return choice;
+            RegistrationNumber = registrationNumber;
+            Color = color;
+            Brand = brand;
+        }
+
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Bil info:");
+            Console.WriteLine(@$"
+Registreringsnummer: {RegistrationNumber}
+Färg: {Color}
+Bilmärke: {Brand}
+            ");
+
         }
     }
 }

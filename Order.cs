@@ -6,16 +6,19 @@ namespace Multifabriken
 {
     public class Order
     {
-        public List<Product> Products = new List<Product>();
+        private List<Product> _products = new List<Product>();
 
         public void AddProduct(Product product)
         {
-            Products.Add(product);
+            _products.Add(product);
         }
 
         public void SeeAllProducts()
         {
-            Console.WriteLine("See products");
+            foreach (Product product in _products)
+            {
+                product.DisplayInfo();
+            }
         }
     }
 }
