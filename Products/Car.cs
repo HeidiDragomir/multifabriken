@@ -22,9 +22,9 @@ namespace Multifabriken.Products
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"\nBil:");
-            Console.WriteLine(@$"
-Registreringsnummer: {RegistrationNumber}
+            DisplayHeader();
+
+            Console.WriteLine(@$"Registreringsnummer: {RegistrationNumber}
 Färg: {Color}
 Bilmärke: {Brand}
             ");

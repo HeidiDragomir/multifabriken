@@ -17,12 +17,10 @@ namespace Multifabriken.Products
             Liter = liter;
         }
 
-
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Oatmilk info:");
-            Console.WriteLine(@$"
-Fetthalt: {Fat}
+            DisplayHeader();
+            Console.WriteLine(@$"Fetthalt: {Fat}
 Litermängd: {Liter}
             ");
 

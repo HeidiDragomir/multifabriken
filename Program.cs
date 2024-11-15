@@ -7,14 +7,13 @@ Order order = new Order();
 
 ConsoleUserInteraction userInteraction = new ConsoleUserInteraction();
 
-userInteraction.ShowMessage("Välkommen, kunden!");
+userInteraction.ShowMessage("Välkommen, kunden!\n");
 
 bool run = true;
 
 while (run)
 {
-
-    userInteraction.ShowMessage("\nVad vill du göra?");
+    userInteraction.ShowMessage("Vad vill du göra?");
     userInteraction.ShowMessage("1. Beställa produkt.");
     userInteraction.ShowMessage("2. Se alla beställda produkter.");
     userInteraction.ShowMessage("3. Avsulta programmet.");
@@ -41,7 +40,7 @@ while (run)
             {
                 userInteraction.ShowMessage("Vad vill du beställa?");
                 userInteraction.ShowMessage("a. Bil.");
-                userInteraction.ShowMessage("b. Goodis.");
+                userInteraction.ShowMessage("b. Godis.");
                 userInteraction.ShowMessage("c. Rör.");
                 userInteraction.ShowMessage("d. Havremjölk.");
                 userInteraction.ShowMessage("x. Ingenting. Tillbaka till meny.");
@@ -50,146 +49,76 @@ while (run)
 
                 Console.Clear();
 
-                //if (string.IsNullOrEmpty(choiceProduct))
-                //{
-                //    Console.ForegroundColor = ConsoleColor.Red;
-                //    userInteraction.ShowMessage("Ditt val är null eller empty.");
-                //    Console.ResetColor();
-                //    continue;
-                //}
-                userInteraction.IsUserInputNullOrEmpty(choiceProduct);
+                if (string.IsNullOrEmpty(choiceProduct))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    userInteraction.ShowMessage("Ditt val är null eller empty.\n");
+                    Console.ResetColor();
+                    continue;
+                }
 
                 switch (choiceProduct)
                 {
                     case "A":
                     case "a":
 
-                        bool run3 = true;
+                        Product orderedCar = order.GetProductDetails("car", userInteraction);
 
-                        while (run3)
-                        {
+                        Console.Clear();
 
-                            string registrationNumber;
-                            do
-                            {
-                                userInteraction.ShowMessage("Skriv registreringsnummer: ");
-                                registrationNumber = Console.ReadLine();
+                        order.AddProduct(orderedCar);
 
-                                userInteraction.IsUserInputNullOrEmpty(registrationNumber);
-
-                            } while (string.IsNullOrEmpty(registrationNumber));
-
-                            string color;
-                            do
-                            {
-                                userInteraction.ShowMessage("Skriv färg: ");
-                                color = Console.ReadLine();
-
-                                userInteraction.IsUserInputNullOrEmpty(color);
-                            } while (string.IsNullOrEmpty(color));
-
-                            string brand;
-                            do
-                            {
-                                userInteraction.ShowMessage("Skriv bilmärke: ");
-                                brand = Console.ReadLine();
-
-                                userInteraction.IsUserInputNullOrEmpty(brand);
-                            } while (string.IsNullOrEmpty(brand));
-
-
-                            // Create Car object with the provided info
-                            Product orderedCar = new Car(registrationNumber, color, brand);
-
-                            Console.Clear();
-
-                            order.AddProduct(orderedCar);
-
-                            orderedCar.DisplayInfo();
-
-                            run3 = false;
-                        }
+                        orderedCar.DisplayInfo();
 
                         break;
 
                     case "B":
                     case "b":
 
-                        bool run4 = true;
+                        Product orderedSweets = order.GetProductDetails("sweets", userInteraction);
 
-                        while (run4)
-                        {
+                        Console.Clear();
 
-                            string flavour;
-                            int num4;
-                            do
-                            {
-                                userInteraction.ShowMessage("Skriv smak: ");
-                                flavour = Console.ReadLine();
+                        order.AddProduct(orderedSweets);
 
-                                userInteraction.IsUserInputNullOrEmpty(flavour);
+                        orderedSweets.DisplayInfo();
 
-                            } while (string.IsNullOrEmpty(flavour));
-
-                            string quantity;
-                            do
-                            {
-                                userInteraction.ShowMessage("Skriv antal: ");
-                                quantity = Console.ReadLine();
-
-                                userInteraction.IsUserInputValid(quantity, out num4);
-                            } while (string.IsNullOrEmpty(quantity));
-
-
-                            Product orderedSweets = new Sweets(flavour, num4);
-
-                            Console.Clear();
-
-                            order.AddProduct(orderedSweets);
-
-                            orderedSweets.DisplayInfo();
-
-                            run4 = false;
-                        }
                         break;
 
                     case "C":
                     case "c":
 
-                        //userInteraction.ShowMessage("Skriv diamter: ");
+                        Product orderedPipe = order.GetProductDetails("pipe", userInteraction);
 
-                        //string diameter = Console.ReadLine();
+                        Console.Clear();
 
-                        //userInteraction.ShowMessage("Skriv längd: ");
+                        order.AddProduct(orderedPipe);
 
-                        //string length = Console.ReadLine();
-
-                        //userInteraction.IsUserInputValid(diameter, out int num2);
-                        //userInteraction.IsUserInputValid(length, out int num3);
-
-                        //Product orderedPipe = new Pipe(diameter, length);
-
-                        //Console.Clear();
-
-                        //order.AddProduct(orderedSweets);
-
-                        //orderedSweets.DisplayInfo();
+                        orderedPipe.DisplayInfo();
 
                         break;
 
                     case "D":
                     case "d":
-                        userInteraction.ShowMessage("Du har beställt havremjöl.");
+
+                        Product orderedOatMilk = order.GetProductDetails("oatmilk", userInteraction);
+
+                        Console.Clear();
+
+                        order.AddProduct(orderedOatMilk);
+
+                        orderedOatMilk.DisplayInfo();
+
                         break;
 
                     case "X":
                     case "x":
-                        userInteraction.ShowMessage("Back to the main menu.");
+                        userInteraction.ShowMessage("Tillbaka till meny.\n");
                         run2 = false;
                         break;
 
                     default:
-                        userInteraction.ShowMessage("Försök igen!");
+                        userInteraction.ShowMessage("Försök igen!\n");
                         break;
 
                 }
@@ -212,7 +141,7 @@ while (run)
             break;
 
         default:
-            userInteraction.ShowMessage("Försök igen!");
+            userInteraction.ShowMessage("Ogiltigt val. Försök igen!");
             break;
     }
 }

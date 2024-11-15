@@ -18,9 +18,8 @@ namespace Multifabriken.Products
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Rör info:");
-            Console.WriteLine(@$"
-Diameter: {Diameter}
+            DisplayHeader();
+            Console.WriteLine(@$"Diameter: {Diameter}
 Längd: {Length}
             ");
 
