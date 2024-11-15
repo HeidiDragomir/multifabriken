@@ -1,5 +1,6 @@
 ﻿
 
+using Multifabriken.App;
 using Multifabriken.Products;
 
 namespace Multifabriken
@@ -8,6 +9,8 @@ namespace Multifabriken
     {
         private List<Product> _products = new List<Product>();
 
+        ConsoleUserInteraction userInteraction = new ConsoleUserInteraction();
+
         public void AddProduct(Product product)
         {
             _products.Add(product);
@@ -15,10 +18,19 @@ namespace Multifabriken
 
         public void SeeAllProducts()
         {
-            foreach (Product product in _products)
+            if (_products.Count > 0)
             {
-                product.DisplayInfo();
+                userInteraction.ShowMessage("Din order:");
+                foreach (Product product in _products)
+                {
+                    product.DisplayInfo();
+                }
             }
+            else
+            {
+                userInteraction.ShowMessage("Det finns inga beställda produkter.");
+            }
+
         }
     }
 }
