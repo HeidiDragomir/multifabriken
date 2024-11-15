@@ -22,7 +22,7 @@ namespace Multifabriken.Products
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Bil info:");
+            Console.WriteLine($"\nBil:");
             Console.WriteLine(@$"
 Registreringsnummer: {RegistrationNumber}
 Färg: {Color}

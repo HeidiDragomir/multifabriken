@@ -3,50 +3,33 @@ using Multifabriken.Products;
 using Multifabriken;
 using Multifabriken.App;
 
-Console.WriteLine("Välkommen, kunden!");
-
 Order order = new Order();
 
-
 ConsoleUserInteraction userInteraction = new ConsoleUserInteraction();
+
+userInteraction.ShowMessage("Välkommen, kunden!");
 
 bool run = true;
 
 while (run)
 {
-    userInteraction.ShowMessage("Vad vill du göra?");
 
+    userInteraction.ShowMessage("\nVad vill du göra?");
     userInteraction.ShowMessage("1. Beställa produkt.");
     userInteraction.ShowMessage("2. Se alla beställda produkter.");
     userInteraction.ShowMessage("3. Avsulta programmet.");
 
     string choiceMainMenu = Console.ReadLine();
-    //int number;
 
-    //bool isParsingSuccesfulInput = int.TryParse(choiceMainMenu, out int number);
+    Console.Clear();
 
-
-    //if (String.IsNullOrEmpty(choiceMainMenu))
-    //{
-    //    userInteraction.ShowMessage("Ditt val är null eller empty.");
-    //    continue;
-    //}
-    //else if (!isParsingSuccesfulInput)
-    //{
-    //    userInteraction.ShowMessage("Nej, du måste välja en siffra. Försök igen!");
-    //    continue;
-    //}
-    //else
-    //{
-    //    userInteraction.ShowMessage($"Du har valt {number}.");
-    //}
-
+    // Check if the user input is valid
+    // If input is invalid, go back to the start of the loop
     if (!userInteraction.IsUserInputValid(choiceMainMenu, out int number))
     {
         continue;
     }
 
-    Console.Clear();
 
     switch (number)
     {
@@ -67,60 +50,139 @@ while (run)
 
                 Console.Clear();
 
+                //if (string.IsNullOrEmpty(choiceProduct))
+                //{
+                //    Console.ForegroundColor = ConsoleColor.Red;
+                //    userInteraction.ShowMessage("Ditt val är null eller empty.");
+                //    Console.ResetColor();
+                //    continue;
+                //}
+                userInteraction.IsUserInputNullOrEmpty(choiceProduct);
+
                 switch (choiceProduct)
                 {
+                    case "A":
                     case "a":
 
-                        // Ask user for car details
-                        userInteraction.ShowMessage("Skriv registreringsnummer: ");
-                        string registrationNumber = Console.ReadLine();
+                        bool run3 = true;
 
-                        userInteraction.ShowMessage("Skriv färg: ");
-                        string color = Console.ReadLine();
+                        while (run3)
+                        {
 
-                        userInteraction.ShowMessage("Skriv bilmärke: ");
-                        string brand = Console.ReadLine();
+                            string registrationNumber;
+                            do
+                            {
+                                userInteraction.ShowMessage("Skriv registreringsnummer: ");
+                                registrationNumber = Console.ReadLine();
 
-                        // Create Car object with the provided info
-                        Product orderedCar = new Car(registrationNumber, color, brand);
+                                userInteraction.IsUserInputNullOrEmpty(registrationNumber);
 
-                        Console.Clear();
+                            } while (string.IsNullOrEmpty(registrationNumber));
 
-                        order.AddProduct(orderedCar);
+                            string color;
+                            do
+                            {
+                                userInteraction.ShowMessage("Skriv färg: ");
+                                color = Console.ReadLine();
 
-                        orderedCar.DisplayInfo();
+                                userInteraction.IsUserInputNullOrEmpty(color);
+                            } while (string.IsNullOrEmpty(color));
+
+                            string brand;
+                            do
+                            {
+                                userInteraction.ShowMessage("Skriv bilmärke: ");
+                                brand = Console.ReadLine();
+
+                                userInteraction.IsUserInputNullOrEmpty(brand);
+                            } while (string.IsNullOrEmpty(brand));
+
+
+                            // Create Car object with the provided info
+                            Product orderedCar = new Car(registrationNumber, color, brand);
+
+                            Console.Clear();
+
+                            order.AddProduct(orderedCar);
+
+                            orderedCar.DisplayInfo();
+
+                            run3 = false;
+                        }
 
                         break;
 
+                    case "B":
                     case "b":
-                        // Ask user for car details
-                        userInteraction.ShowMessage("Skriv smak: ");
-                        string flavour = Console.ReadLine();
 
-                        userInteraction.ShowMessage("Skriv antal: ");
-                        string quantity = Console.ReadLine();
+                        bool run4 = true;
 
-                        userInteraction.IsUserInputValid(quantity, out int num);
+                        while (run4)
+                        {
 
-                        // Create Car object with the provided info
-                        Product orderedSweets = new Sweets(flavour, num);
+                            string flavour;
+                            int num4;
+                            do
+                            {
+                                userInteraction.ShowMessage("Skriv smak: ");
+                                flavour = Console.ReadLine();
+
+                                userInteraction.IsUserInputNullOrEmpty(flavour);
+
+                            } while (string.IsNullOrEmpty(flavour));
+
+                            string quantity;
+                            do
+                            {
+                                userInteraction.ShowMessage("Skriv antal: ");
+                                quantity = Console.ReadLine();
+
+                                userInteraction.IsUserInputValid(quantity, out num4);
+                            } while (string.IsNullOrEmpty(quantity));
+
+
+                            Product orderedSweets = new Sweets(flavour, num4);
+
+                            Console.Clear();
+
+                            order.AddProduct(orderedSweets);
+
+                            orderedSweets.DisplayInfo();
+
+                            run4 = false;
+                        }
+                        break;
+
+                    case "C":
+                    case "c":
+
+                        //userInteraction.ShowMessage("Skriv diamter: ");
+
+                        //string diameter = Console.ReadLine();
+
+                        //userInteraction.ShowMessage("Skriv längd: ");
+
+                        //string length = Console.ReadLine();
+
+                        //userInteraction.IsUserInputValid(diameter, out int num2);
+                        //userInteraction.IsUserInputValid(length, out int num3);
+
+                        //Product orderedPipe = new Pipe(diameter, length);
 
                         //Console.Clear();
 
-                        order.AddProduct(orderedSweets);
+                        //order.AddProduct(orderedSweets);
 
-                        orderedSweets.DisplayInfo();
+                        //orderedSweets.DisplayInfo();
 
                         break;
 
-                    case "c":
-                        userInteraction.ShowMessage("Du har beställt en rör.");
-                        break;
-
+                    case "D":
                     case "d":
                         userInteraction.ShowMessage("Du har beställt havremjöl.");
                         break;
 
+                    case "X":
                     case "x":
                         userInteraction.ShowMessage("Back to the main menu.");
                         run2 = false;
@@ -138,7 +200,6 @@ while (run)
             break;
 
         case 2:
-            userInteraction.ShowMessage("Din order:");
 
             order.SeeAllProducts();
 
