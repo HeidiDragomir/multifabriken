@@ -18,9 +18,8 @@ namespace Multifabriken.Products
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Godis info:");
-            Console.WriteLine(@$"
-Smak: {Flavour}
+            DisplayHeader();
+            Console.WriteLine(@$"Smak: {Flavour}
 Antal: {Quantity}
             ");
 

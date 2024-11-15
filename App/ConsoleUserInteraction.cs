@@ -9,24 +9,13 @@ namespace Multifabriken.App
             Console.WriteLine(message);
         }
 
-        public bool IsUserInputNullOrEmpty(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                ShowMessage("Ditt val är null eller empty.");
-                Console.ResetColor();
-                return true;
-            }
-            return false;
-        }
 
         public bool IsUserInputValid(string input, out int number)
         {
             if (string.IsNullOrEmpty(input))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                ShowMessage("Ditt val är null eller empty.");
+                ShowMessage("Ditt val är null eller empty.\n");
                 number = 0;
                 Console.ResetColor();
                 return false;
@@ -40,7 +29,7 @@ namespace Multifabriken.App
             }
 
             Console.ForegroundColor = ConsoleColor.Red;
-            ShowMessage("Nej, du måste välja en siffra. Försök igen!");
+            ShowMessage("Nej, du måste välja en siffra. Försök igen!\n");
             Console.ResetColor();
             return false;
 

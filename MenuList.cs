@@ -4,13 +4,15 @@ namespace Multifabriken
 {
     public class MenuList
     {
-        public string Name { get; set; }
+        //private List<Menu> _itemsMenu = new List<Menu>();
 
-        public List<Menu> Items = new List<Menu>();
+        //public void ShowMenu()
+        //{
+        //    foreach (var item in _itemsMenu)
+        //    {
+        //        Console.WriteLine(item);
+        //    }
+        //}
 
-        public MenuList(string name)
-        {
-            Name = name;
-        }
     }
 }
