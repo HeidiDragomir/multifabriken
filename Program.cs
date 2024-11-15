@@ -62,7 +62,7 @@ while (run)
                     case "A":
                     case "a":
 
-                        Product orderedCar = order.GetProductDetails("car", userInteraction);
+                        Product orderedCar = userInteraction.GetProductDetails("car");
 
                         Console.Clear();
 
@@ -75,7 +75,7 @@ while (run)
                     case "B":
                     case "b":
 
-                        Product orderedSweets = order.GetProductDetails("sweets", userInteraction);
+                        Product orderedSweets = userInteraction.GetProductDetails("sweets");
 
                         Console.Clear();
 
@@ -88,7 +88,7 @@ while (run)
                     case "C":
                     case "c":
 
-                        Product orderedPipe = order.GetProductDetails("pipe", userInteraction);
+                        Product orderedPipe = userInteraction.GetProductDetails("pipe");
 
                         Console.Clear();
 
@@ -101,7 +101,7 @@ while (run)
                     case "D":
                     case "d":
 
-                        Product orderedOatMilk = order.GetProductDetails("oatmilk", userInteraction);
+                        Product orderedOatMilk = userInteraction.GetProductDetails("oatmilk");
 
                         Console.Clear();
 
